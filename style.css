@@ -2425,6 +2425,11 @@ p {
   background-color: var(--primary-dark);
 }
 
+
+.single-news .image {
+  aspect-ratio: 16 / 9;
+}
+
 .post-content {
   font-family: system-ui, sans-serif;
   font-size: 1.1rem;
@@ -2433,6 +2438,15 @@ p {
   margin: 0 auto;
   padding: 2em 1em;
 }
+
+
+.post-content img:first-of-type {
+  max-height: 400px;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 
 .post-content h1,
 .post-content h2,
@@ -2455,4 +2469,3 @@ p {
   height: auto;
   margin: 2em 0;
 }
-
