@@ -2435,25 +2435,23 @@ p {
   font-family: system-ui, sans-serif;
   font-size: 1.1rem;
   line-height: 1.7;
-  max-width: 750px;  /* this is fine to keep */
-  /* Removed margin: 0 auto; */
+  /* Removed max-width to align with sidebar */
   padding: 2em 1em;
 }
-
 
 .post-content img:first-of-type {
   max-height: 400px;
   width: 100%;
   object-fit: cover;
   display: block;
+  margin: 1em 0; /* Less space under header image */
 }
-
 
 .post-content h1,
 .post-content h2,
 .post-content h3 {
   font-weight: 600;
-  margin-top: 1.4em;
+  margin-top: 1em; /* Reduced spacing between sections */
 }
 
 .post-content p {
@@ -2475,6 +2473,7 @@ p {
   list-style: disc;
   padding-left: 1.5em;
 }
+
 .post-content ol {
   list-style: decimal;
   padding-left: 1.5em;
@@ -2486,7 +2485,7 @@ p {
   align-items: flex-start;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2em 1em;
+  padding: 1em; /* Reduced padding so tops align better */
 }
 
 .sidebar {
