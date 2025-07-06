@@ -2491,7 +2491,7 @@ p {
 .sidebar {
   flex: 1.2;
   background: #f7f7f7;
-  padding: 1.5em;
+  padding-top: 3em;
   border-radius: 4px;
 }
 
