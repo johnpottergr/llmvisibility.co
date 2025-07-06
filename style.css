@@ -2451,7 +2451,7 @@ p {
 .post-content h2,
 .post-content h3 {
   font-weight: 600;
-  margin-top: 1em; /* Reduced spacing between sections */
+  margin-top: .8em; /* Reduced spacing between sections */
 }
 
 .post-content p {
@@ -2491,8 +2491,9 @@ p {
 .sidebar {
   flex: 1.2;
   background: #f7f7f7;
-  padding-top: 3em;
+  padding: 1.5em;
   border-radius: 4px;
+  margin-top: 3em;
 }
 
 .sidebar h2 {
