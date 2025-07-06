@@ -139,7 +139,8 @@
               Brands that are successful don't wait around for somethng to happen (like Milo here). They lead the way, using AI to amplify their message before the rest catch up. Signals helps you achieve this goal with the latest tech.
             </p>
             <div class="button">
-              <a href="javascript:void(0)" class="btn primary-btn">Get Started</a>
+              <a href="https://calendly.com/johnpottergr/15min" class="btn primary-btn-outline" target="_blank" rel="noopener noreferrer">
+Get Started</a>
               </a>
             </div>
           </div>
@@ -742,105 +743,59 @@
   <!--====== portfolio THREE PART ENDS ======-->
 
 
-  <!-- Start Latest News Area -->
-  <div id="blog" class="latest-news-area section">
-    <!--======  Start Section Title Five ======-->
-    <div class="section-title-five">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="content">
-              <h6>latest news</h6>
-              <h2 class="fw-bold">Signals Blog</h2>
-              <p>
-                Fresh takes on tools, tactics, and ideas driving brand visibility.
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- row -->
-      </div>
-      <!-- container -->
-    </div>
-    <!--======  End Section Title Five ======-->
+<!-- Start Latest News Area -->
+<div id="blog" class="latest-news-area section">
+  <!--======  Start Section Title Five ======-->
+  <div class="section-title-five">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-6 col-12">
-          <!-- Single News -->
-          <div class="single-news">
-            <div class="image">
-              <a href="javascript:void(0)"><img class="thumb" src="assets/images/blog/1.jpeg" alt="Blog" /></a>
-              <div class="meta-details">
-                <img class="thumb" src="assets/images/blog/b6.jpg" alt="Author" />
-
-              </div>
-            </div>
-            <div class="content-body">
-              <h4 class="title">
-                <a href="javascript:void(0)"> n8n vs. MCP for LLM Workflows </a>
-              </h4>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industry's
-                standard.
-              </p>
-            </div>
+        <div class="col-12">
+          <div class="content">
+            <h6>latest news</h6>
+            <h2 class="fw-bold">Signals Blog</h2>
+            <p>
+              Fresh takes on tools, tactics, and ideas driving brand visibility.
+            </p>
           </div>
-          <!-- End Single News -->
-        </div>
-        <div class="col-lg-4 col-md-6 col-12">
-          <!-- Single News -->
-          <div class="single-news">
-            <div class="image">
-              <a href="javascript:void(0)"><img class="thumb" src="assets/images/blog/2.jpg" height="190" alt="Blog" /></a>
-              <div class="meta-details">
-                <img class="thumb" src="assets/images/blog/b6.jpg" alt="Author" />
-
-              </div>
-            </div>
-            <div class="content-body">
-              <h4 class="title">
-                <a href="javascript:void(0)">
-                  The Blind Spot in Your Attribution, How to Turn ChatGPT Logs into Real Insight
-                </a>
-              </h4>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industry's
-                standard.
-              </p>
-            </div>
-          </div>
-          <!-- End Single News -->
-        </div>
-        <div class="col-lg-4 col-md-6 col-12">
-          <!-- Single News -->
-          <div class="single-news">
-            <div class="image">
-              <a href="javascript:void(0)"><img class="thumb" src="assets/images/blog/3.jpg" alt="Blog" /></a>
-              <div class="meta-details">
-                <img class="thumb" src="assets/images/blog/b6.jpg" alt="Author" />
-              </div>
-            </div>
-            <div class="content-body">
-              <h4 class="title">
-                <a href="javascript:void(0)">
-                  9 Reasons Why Your Content Falls Flat with AI
-                </a>
-              </h4>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industry's
-                standard.
-              </p>
-            </div>
-          </div>
-          <!-- End Single News -->
         </div>
       </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
+  </div>
+
+ <!--======  End Section Title Five ======-->
+
+  <div class="container">
+    <div class="row">
+      {% for post in site.posts limit:3 %}
+      <div class="col-lg-4 col-md-6 col-12">
+        <!-- Single News -->
+        <div class="single-news">
+          <div class="image">
+            <a href="{{ post.url }}">
+              <img class="thumb" src="{{ post.image }}" alt="{{ post.title }}" />
+            </a>
+            <div class="meta-details">
+              <img class="thumb" src="assets/images/blog/b6.jpg" alt="Author" />
+            </div>
+          </div>
+          <div class="content-body">
+            <h4 class="title">
+              <a href="{{ post.url }}">{{ post.title }}</a>
+            </h4>
+            <p>{{ post.description }}</p>
+          </div>
+        </div>
+        <!-- End Single News -->
+      </div>
+      {% endfor %}
     </div>
   </div>
-  <!-- End Latest News Area -->
+</div>
+<!-- End Latest News Area -->
+
+
 
 
 
