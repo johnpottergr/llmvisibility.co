@@ -2436,7 +2436,7 @@ p {
   font-size: 1.1rem;
   line-height: 1.7;
   /* Removed max-width to align with sidebar */
-  padding: 2em 1em;
+  padding: 1em 1em;
 }
 
 .post-content img:first-of-type {
