@@ -2481,21 +2481,20 @@ p {
 
 .post-layout {
   display: flex;
-  gap: 2em;
+  gap: 2rem;
   align-items: flex-start;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2em 1em;
-  flex-wrap: wrap; /* so it stacks on narrow screens */
 }
 
 .post-content {
-  flex: 3 1 600px;
+  flex: 3;
 }
 
 .sidebar {
-  flex: 1 1 250px;
-  background: #f5f5f5;
+  flex: 1;
+  background: #f7f7f7;
   padding: 1em;
   border-radius: 4px;
 }
@@ -2522,4 +2521,10 @@ p {
 
 .sidebar a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+  .post-layout {
+    flex-direction: column;
+  }
 }
