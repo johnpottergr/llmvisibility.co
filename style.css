@@ -2489,10 +2489,6 @@ p {
   padding: 2em 1em;
 }
 
-.post-content {
-  flex: 3;
-}
-
 .sidebar {
   flex: 1;
   background: #f7f7f7;
