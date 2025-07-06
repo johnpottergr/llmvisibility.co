@@ -2431,11 +2431,12 @@ p {
 }
 
 .post-content {
+  flex: 3;
   font-family: system-ui, sans-serif;
   font-size: 1.1rem;
   line-height: 1.7;
-  max-width: 750px;
-  margin: 0 auto;
+  max-width: 750px;  /* this is fine to keep */
+  /* Removed margin: 0 auto; */
   padding: 2em 1em;
 }
 
