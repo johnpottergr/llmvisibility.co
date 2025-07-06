@@ -2444,7 +2444,7 @@ p {
   width: 100%;
   object-fit: cover;
   display: block;
-  margin: 2em 0; /* Less space under header image */
+  margin: 1em 1em; /* Less space under header image */
 }
 
 .post-content h1,
