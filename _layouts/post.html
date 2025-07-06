@@ -14,7 +14,11 @@
       {% if page.image %}
         <img src="{{ page.image }}" alt="{{ page.title }}" />
       {% endif %}
-      {{ content }}
+
+      <!-- Wrap post content here -->
+      <div class="post-content">
+        {{ content }}
+      </div>
     </article>
   </main>
 </body>
