@@ -2530,3 +2530,10 @@ p {
     flex-direction: column;
   }
 }
+
+.btn.primary-btn {
+  display: inline-block !important;
+  background: red !important;
+  color: white !important;
+  padding: 1em 2em !important;
+}
