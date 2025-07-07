@@ -33,7 +33,7 @@ Tools like Screaming Frog Log File Analyzer (see below) or GoAccess can help you
 
   <img src="/assets/images/blog/screaming.png" alt="Screaming Frog diagram">
 
-Screaming Frog
+*Screaming Frog*
 
 ### 2. Build a Simple Report
 Once you isolate these records, create a spreadsheet or dashboard that answers a few core questions: Which URLs are being accessed?
