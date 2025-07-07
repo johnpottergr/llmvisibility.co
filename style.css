@@ -962,7 +962,7 @@ p {
 .header-eight .header-content p {
   margin-top: 30px;
   color: var(--white);
-  opacity: 0.4;
+  opacity: 0.9;
 }
 .header-eight .button {
   margin-top: 40px;
