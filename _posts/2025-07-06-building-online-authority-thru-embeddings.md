@@ -21,10 +21,6 @@ Here’s what that looks like in practice.
 
 - **n8n** ties these tools together—triggering the LLM to draft a response, deploying Agent S2 to post it, and tracking how people respond.
 
-You could say they work together as a team:
-
- <img src="/assets/images/blog/4.png" alt="AI as a team?">
-
 
 ## AI Huddle
 Combining these tools goes beyond optimization. It creates a system for putting your brand in the right conversations with the right tone on a consistent basis. If someone mentions your company in a podcast transcript or blog comment, the system can surface that mention, craft a thoughtful reply, and publish it. All without manual review.
