@@ -66,13 +66,10 @@
                   <a class="page-scroll" href="#services">Services</a>
                 </li>
                 <li class="nav-item">
-                  <a class="page-scroll" href="#video">How It Works</a>
-                </li>
-                <li class="nav-item">
                   <a class="page-scroll" href="#portfolio">AI Resources</a>
                 </li>
                 <li class="nav-item">
-                  <a class="page-scroll" href="#blog">Blog</a>
+                  <a class="page-scroll" href="https://llmvisibility.co/blog.html">Blog</a>
                 </li>
                 <li class="nav-item">
                   <a class="page-scroll" href="#contact">Contact</a>
@@ -344,7 +341,7 @@
               <i class="lni lni-capsule"></i>
             </div>
             <div class="service-content">
-              <h4>Visibility Benchmark Audit</h4>
+              <h4>Visibility Audit</h4>
               <p>
                  Get a clear picture of where your brand stands today.
                  We’ll analyze your content, track mentions across platforms,
@@ -432,47 +429,6 @@
     </div>
   </section>
   <!-- ===== service-area end ===== -->
-
-  <!--====== VIDEO ONE PART START ======-->
-
-  <section id="video" class="video-area video-one">
-    <!--======  Start Section Title Five ======-->
-    <div class="section-title-five">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="content">
-              <h6>Intro Video</h6>
-              <h2 class="fw-bold">Explainer Video</h2>
-              <p>
-              Discover why showing up in AI-powered search
-              is the next big advantage for your brand.              </p>
-            </div>
-          </div>
-        </div>
-        <!-- row -->
-      </div>
-      <!-- container -->
-    </div>
-    <!--======  End Section Title Five ======-->
-    <div class="container">
-      <!-- row -->
-      <div class="row justify-content-center">
-        <div class="col-lg-10">
-          <div class="video-content text-center">
-            <img src="assets/images/video/video-bg.png" width="850" alt="Video" />
-            <a class="video-popup glightbox" href="https://youtu.be/Nf8z0vtIkMw?si=SkEXbwFGzx1XDuEN">
-              <i class="lni lni-play"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- row -->
-    </div>
-    <!-- container -->
-  </section>
-
-  <!--====== VIDEO ONE PART ENDS ======-->
 
 
   <!-- Start Cta Area -->
@@ -751,159 +707,6 @@
   </section>
 
   <!--====== portfolio THREE PART ENDS ======-->
-
-
-<!-- Start Latest News Area -->
-<div id="blog" class="latest-news-area section">
-  <!--======  Start Section Title Five ======-->
-  <div class="section-title-five">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="content">
-            <h6>latest news</h6>
-            <h2 class="fw-bold">My Signals Blog</h2>
-            <p>
-              Fresh takes on tools, tactics, and ideas driving brand visibility.
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- row -->
-    </div>
-    <!-- container -->
-  </div>
-
- <!--======  End Section Title Five ======-->
-
-  <div class="container">
-    <div class="row">
-      {% for post in site.posts limit:6 %}
-      <div class="col-lg-4 col-md-6 col-12">
-        <!-- Single News -->
-        <div class="single-news">
-          <div class="image">
-            <a href="{{ post.url }}">
-              <img class="thumb" src="{{ post.image }}" alt="{{ post.title }}" />
-            </a>
-          </div>
-          <div class="content-body">
-            <h4 class="title">
-              <a href="{{ post.url }}">{{ post.title }}</a>
-            </h4>
-            <p>{{ post.description }}</p>
-          </div>
-        </div>
-        <!-- End Single News -->
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-<!-- End Latest News Area -->
-
-
-
-
-
-  <!-- ========================= contact-section start ========================= -->
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-4">
-          <div class="contact-item-wrapper">
-            <div class="row">
-              <div class="col-12 col-md-6 col-xl-12">
-                <div class="contact-item">
-                  <div class="contact-icon">
-                    <i class="lni lni-phone"></i>
-                  </div>
-                  <div class="contact-content">
-                    <h4>Contact</h4>
-                    <p>616.745.2985</p>
-                    <p>johnpottergr@gmail.com</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-md-6 col-xl-12">
-                <div class="contact-item">
-                  <div class="contact-icon">
-                    <i class="lni lni-map-marker"></i>
-                  </div>
-                  <div class="contact-content">
-                    <h4>Address</h4>
-                    <p>Grand Rapids, MI</p>
-                    <p>United States</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-md-6 col-xl-12">
-                <div class="contact-item">
-                  <div class="contact-icon">
-                    <i class="lni lni-alarm-clock"></i>
-                  </div>
-                  <div class="contact-content">
-                    <h4>Schedule</h4>
-                    <p>24 Hours / 7 Days Open</p>
-                    <p>Office time: 10 AM - 5:30 PM</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-8">
-          <div class="contact-form-wrapper">
-            <div class="row">
-              <div class="col-xl-10 col-lg-8 mx-auto">
-                <div class="section-title text-center">
-                  <span> Get in Touch </span>
-                  <h2>
-                    Ready to Get Started
-                  </h2>
-                  <p>
-                    Even if you’re just curious about how these tools work, feel free to get in touch. I’m happy to share insights.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <form action="#" class="contact-form">
-              <div class="row">
-                <div class="col-md-6">
-                  <input type="text" name="name" id="name" placeholder="Name" required />
-                </div>
-                <div class="col-md-6">
-                  <input type="email" name="email" id="email" placeholder="Email" required />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <input type="text" name="phone" id="phone" placeholder="Phone" required />
-                </div>
-                <div class="col-md-6">
-                  <input type="text" name="subject" id="email" placeholder="Subject" required />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <textarea name="message" id="message" placeholder="Type Message" rows="5"></textarea>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="button text-center rounded-buttons">
-                    <button type="submit" class="btn primary-btn rounded-full">
-                      Send Message
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- ========================= contact-section end ========================= -->
 
   <!-- Start Footer Area -->
@@ -935,6 +738,7 @@
               <div class="footer-widget f-link">
                 <h5>Solutions</h5>
                 <ul>
+                  <li><a href="javascript:void(0)">Visibility Audit</a></li>
                   <li><a href="javascript:void(0)">Authority Building</a></li>
                   <li><a href="javascript:void(0)">Content Intelligence</a></li>
                   <li><a href="javascript:void(0)">Workflow Automation</a></li>
@@ -948,10 +752,10 @@
               <div class="footer-widget f-link">
                 <h5>Support</h5>
                 <ul>
-                  <li><a href="javascript:void(0)">Getting Started</a></li>
-                  <li><a href="javascript:void(0)">How It Works</a></li>
-                  <li><a href="javascript:void(0)">Use Cases</a></li>
-                  <li><a href="javascript:void(0)">Platform Update</a></li>
+                  <li><a href="https://calendly.com/johnpottergr/15min">Getting Started</a></li>
+                  <li><a href="https://llmvisibility.co/video.html">How It Works</a></li>
+                  <li><a href="javascript:void(0)">Privacy</a></li>
+                  <li><a href="javascript:void(0)">Terms of Service</a></li>
                 </ul>
               </div>
               <!-- End Single Widget -->
