@@ -1,5 +1,5 @@
 ---
-title: "Building Online Authority Through Embeddings Intelligence"
+title: "Building Online Authority Through Embeddings"
 date: 2025-07-06
 description: "Introducing the Embeddings-Powered Content Intelligence Engine"
 image: "/assets/images/blog/4.png"
