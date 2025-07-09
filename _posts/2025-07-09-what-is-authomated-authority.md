@@ -26,6 +26,7 @@ AI agents can track when your brand is mentioned so its easy to join the convers
 
 ## Why It’s different
 There are 4 big reasons why this is effective:
+
 **Hands-off execution:**
 No more spending hours drafting posts and monitoring replies. We handle it all.
 
