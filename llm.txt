@@ -1,0 +1,20 @@
+# LLM crawling permissions for llmvisibility.co
+
+# Allow reputable AI crawlers
+User-agent: OpenAI
+Allow: /
+
+User-agent: Anthropic
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Optional: monetization and usage policy
+Contact: johnpottergr@gmail.com 
