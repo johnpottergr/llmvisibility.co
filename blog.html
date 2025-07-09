@@ -154,16 +154,20 @@
               Fresh takes on tools, tactics, and ideas driving brand visibility.
             </p>
             <!-- Subscribe Form -->
-<div class="mt-4 mb-5 d-flex justify-content-center">
+            <div class="mt-4 mb-5 d-flex justify-content-center">
   <form
-    action="#"
-    method="POST"
-    class="d-flex flex-column flex-sm-row align-items-center gap-3 w-100"
+    action="https://buttondown.com/api/emails/embed-subscribe/johnpottergr"
+    method="post"
+    target="popupwindow"
+    onsubmit="window.open('https://buttondown.com/johnpottergr', 'popupwindow')"
+    class="d-flex flex-column flex-sm-row align-items-center gap-3 w-100 embeddable-buttondown-form"
     style="max-width: 600px;"
   >
+    <label for="bd-email" class="visually-hidden">Enter your email</label>
     <input
       type="email"
       name="email"
+      id="bd-email"
       placeholder="Enter Your Email"
       required
       class="form-control px-4 py-3 text-lg rounded"
@@ -189,40 +193,9 @@
   </form>
 </div>
 
-          </div>
-        </div>
-      </div>
-      <!-- row -->
-    </div>
-    <!-- container -->
-  </div>
-
- <!--======  End Section Title Five ======-->
-
-  <div class="container">
-    <div class="row">
-      {% for post in site.posts limit:12 %}
-      <div class="col-lg-4 col-md-6 col-12">
-        <!-- Single News -->
-        <div class="single-news">
-          <div class="image">
-            <a href="{{ post.url }}">
-              <img class="thumb" src="{{ post.image }}" alt="{{ post.title }}" />
-            </a>
-          </div>
-          <div class="content-body">
-            <h4 class="title">
-              <a href="{{ post.url }}">{{ post.title }}</a>
-            </h4>
-            <p>{{ post.description }}</p>
-          </div>
-        </div>
-        <!-- End Single News -->
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
+<p style="text-align: center; margin-top: 10px;">
+  <a href="https://buttondown.com/refer/johnpottergr" target="_blank" style="font-family: Helvetica, sans-serif; font-size: 0.8em; color: #666; text-decoration: none;">Powered by Buttondown.</a>
+</p>
 <!-- End Latest News Area -->
 
 
