@@ -38,7 +38,7 @@ We spot trending topics in your space and create content that aligns with what y
 **SEO-free visibility:**
 Rather than chase backlinks, AI agents focus on organic signals—mentions, shares, and engagement—that search engines and buyers trust.
 
-## How You Benefit
+## How you benefit
 ✅ Save time and resources
 
 ✅ Stay consistently visible and relevant
