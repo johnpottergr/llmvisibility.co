@@ -24,7 +24,7 @@ When people comment or ask questions, the system responds promptly with thoughtf
 ✅ **Monitors mentions and attention:**
 AI agents can track when your brand is mentioned so its easy to join the conversation, turning passive mentions into active relationships.
 
-## Why It’s different
+## Why it’s different
 There are 4 big reasons why this is effective:
 
 **Hands-off execution:**
