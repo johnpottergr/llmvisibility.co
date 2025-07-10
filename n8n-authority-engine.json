@@ -1,0 +1,120 @@
+
+{
+  "name": "Embeddings-Powered Authority Engine",
+  "nodes": [
+    {
+      "parameters": {
+        "command": "agent-s2 --platform x --action scrape --query 'AI automation' --filter 'retweets>500'",
+        "options": {}
+      },
+      "name": "Scrape Trending Content",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "command": "ollama run deepseek 'Generate embeddings for {{ $json[\"scraped_content\"] }} and compare with {{ $json[\"my_content\"] }} to find semantic gaps.'",
+        "options": {}
+      },
+      "name": "Generate Embeddings & Gap Analysis",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "command": "ollama run deepseek 'Generate X thread on topic {{ $json[\"gap_topics\"] }} aligned to {{ $json[\"trending_semantics\"] }} and include brand mention.'"
+      },
+      "name": "Generate Optimized Content",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "command": "agent-s2 --platform x --action post --content '{{ $json[\"thread\"] }}'"
+      },
+      "name": "Post Content via Agent S2",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.x.com/2/tweets/{{ $json[\"post_id\"] }}/metrics",
+        "method": "GET"
+      },
+      "name": "Monitor Engagement",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "command": "ollama run deepseek 'Generate reply to {{ $json[\"comment\"] }} with tone and semantics matching {{ $json[\"thread\"] }}' && agent-s2 --platform x --action reply --post_id {{ $json[\"post_id\"] }} --content '{{ $json[\"reply\"] }}'"
+      },
+      "name": "Engage with Feedback",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1100, 300]
+    }
+  ],
+  "connections": {
+    "Scrape Trending Content": {
+      "main": [
+        [
+          {
+            "node": "Generate Embeddings & Gap Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Embeddings & Gap Analysis": {
+      "main": [
+        [
+          {
+            "node": "Generate Optimized Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Optimized Content": {
+      "main": [
+        [
+          {
+            "node": "Post Content via Agent S2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post Content via Agent S2": {
+      "main": [
+        [
+          {
+            "node": "Monitor Engagement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monitor Engagement": {
+      "main": [
+        [
+          {
+            "node": "Engage with Feedback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
