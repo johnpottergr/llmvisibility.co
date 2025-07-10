@@ -2,7 +2,7 @@
 title: "Why Click to Connect Might Be a Turning Point for Brand Visibility"
 date: 2025-07-10
 description: "MCP is a new protocol that will change the web"
-image: "/assets/images/blog/25.png"
+image: "/assets/images/blog/25.jpg"
 ---
 Soon, every AI assistant out there will be able to talk directly to your brand. Not scrape your site, not guess what you meant in a blog post, but actually plug into your content, your campaigns, your knowledge base.
 
