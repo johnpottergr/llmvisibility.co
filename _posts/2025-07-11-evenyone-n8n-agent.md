@@ -1,7 +1,7 @@
 ---
 title: "When Everyone Has An n8n Agent"
 date: 2025-07-11
-description: "what happens when everyone has one of these little helpers"
+description: "What happens when everyone has one of these little helpers"
 image: "/assets/images/blog/28.jpg"
 ---
 Personal AI agents are small software companions that operate quietly in the background to manage your business. They can manage your schedule and generally optimize your life. They’re also about to go mainstream.

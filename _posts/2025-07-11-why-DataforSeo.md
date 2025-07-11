@@ -1,7 +1,7 @@
 ---
 title: "Why I Like DataForSEO, Pt. 2"
 date: 2025-07-11
-description: "Using OpenAI at even small scale with their free tier left me coming up short
+description: "Their data is raw, structured, and ready for automation"
 image: "/assets/images/blog/30.jpg"
 ---
 If you are considering DataForSEO for content strategy or brief creation, I have insights to share. Here's what I found.

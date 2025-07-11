@@ -1,7 +1,7 @@
 ---
 title: "The Limits of OpenAI"
 date: 2025-07-11
-description: "Using OpenAI at even small scale with their free tier left me coming up short
+description: "OpenAI comes up short when it came to flexibility, speed, and trial experience"
 image: "/assets/images/blog/27.jpg"
 ---
 Constructing a custom content brief generator is an exciting endeavor. If done right, you can end up with a Clearscope-style tool that analyzes and summarizes the main topics from top-ranking search results. But testing your tool can also test your patience.

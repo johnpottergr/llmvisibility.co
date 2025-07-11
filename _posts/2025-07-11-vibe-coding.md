@@ -1,7 +1,7 @@
 ---
 title: "Vibe Coding Is A New Way to Build"
 date: 2025-07-11
-description: "the ability to code is no longer a barrier to software development"
+description: "The ability to code is no longer a barrier to software development"
 image: "/assets/images/blog/36.jpg"
 ---
 “Vibe coding” sounds like a throwaway phrase. You could be forgiven for not taking it seriously. But for many would-be developers, vibe coding offers genuine creative freedom. With vibe coding, the ability to code is no longer a barrier to software development. LLMs now handle most of the complex construction details.
