@@ -1,0 +1,162 @@
+{
+  "name": "Embeddings-Powered Authority Engine",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://api.x.com/2/tweets/search/recent?query=AI%20automation&tweet.fields=public_metrics&max_results=10",
+        "method": "GET",
+        "authentication": "oAuth2",
+        "options": {
+          "responseFormat": "json"
+        }
+      },
+      "name": "Scrape Trending Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "credentials": {
+        "oAuth2Api": {
+          "oauth2Client": {
+            "clientId": "{{$env.X_CLIENT_ID}}",
+            "clientSecret": "{{$env.X_CLIENT_SECRET}}",
+            "accessToken": "{{$env.X_ACCESS_TOKEN}}",
+            "refreshToken": "{{$env.X_REFRESH_TOKEN}}"
+          }
+        }
+      }
+    },
+    {
+      "parameters": {
+        "code": "const scraped_content = $input.first().json.data.map(tweet => tweet.text).join('\\n'); const my_content = 'My blog on AI tools...'; const result = await $executePython('python_script.py', { action: 'scrape_analyze', text: scraped_content, my_content, n_clusters: 3 }); return JSON.parse(result);"
+      },
+      "name": "Generate Embeddings & Gap Analysis",
+      "type": "n8n-nodes-base.executeCode",
+      "typeVersion": 1,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "code": "const gaps = $input.first().json.map(item => item.cluster).filter(c => c !== 0); const prompt = `Generate X thread on topic ${gaps.length ? gaps.join(', ') : 'AI automation'} aligned to trending semantics. Output as JSON with key 'thread'.`; const result = await $executePython('python_script.py', { action: 'generate_content', prompt }); return JSON.parse(result);"
+      },
+      "name": "Generate Optimized Content",
+      "type": "n8n-nodes-base.executeCode",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.x.com/2/tweets",
+        "method": "POST",
+        "authentication": "oAuth2",
+        "body": {
+          "text": "{{$json.thread}}"
+        }
+      },
+      "name": "Post Content via API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [700, 300],
+      "credentials": {
+        "oAuth2Api": {
+          "oauth2Client": {
+            "clientId": "{{$env.X_CLIENT_ID}}",
+            "clientSecret": "{{$env.X_CLIENT_SECRET}}",
+            "accessToken": "{{$env.X_ACCESS_TOKEN}}",
+            "refreshToken": "{{$env.X_REFRESH_TOKEN}}"
+          }
+        }
+      }
+    },
+    {
+  "parameters": {
+    "url": "https://api.x.com/2/tweets/search/recent?query=to:${$json.data.id}&max_results=5&tweet.fields=text",
+    "method": "GET",
+    "authentication": "oAuth2",
+    "options": {
+      "responseFormat": "json"
+    }
+  },
+  "name": "Monitor Engagement",
+  "type": "n8n-nodes-base.httpRequest",
+  "typeVersion": 1,
+  "position": [900, 300],
+  "credentials": {
+    "oAuth2Api": {
+      "oauth2Client": {
+        "clientId": "{{$env.X_CLIENT_ID}}",
+        "clientSecret": "{{$env.X_CLIENT_SECRET}}",
+        "accessToken": "{{$env.X_ACCESS_TOKEN}}",
+        "refreshToken": "{{$env.X_REFRESH_TOKEN}}"
+      }
+    }
+  }
+},
+    {
+      "parameters": {
+        "code": "const comment = $input.first().json.data.comment || 'Great thread!'; const prompt = `Generate reply to ${comment} with tone and semantics matching AI automation. Output as JSON with key 'reply'.`; const result = await $executePython('python_script.py', { action: 'generate_content', prompt }); const reply = JSON.parse(result).reply; await $executePython('python_script.py', { action: 'post_reply', post_id: $input.first().json.data.id, content: reply }); return { reply };"
+      },
+      "name": "Engage with Feedback",
+      "type": "n8n-nodes-base.executeCode",
+      "typeVersion": 1,
+      "position": [1100, 300]
+    }
+  ],
+  "connections": {
+    "Scrape Trending Content": {
+      "main": [
+        [
+          {
+            "node": "Generate Embeddings & Gap Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Embeddings & Gap Analysis": {
+      "main": [
+        [
+          {
+            "node": "Generate Optimized Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Optimized Content": {
+      "main": [
+        [
+          {
+            "node": "Post Content via API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post Content via API": {
+      "main": [
+        [
+          {
+            "node": "Monitor Engagement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monitor Engagement": {
+      "main": [
+        [
+          {
+            "node": "Engage with Feedback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
+

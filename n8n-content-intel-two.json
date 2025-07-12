@@ -1,0 +1,182 @@
+{
+  "nodes": [
+    {
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "parameters": {
+        "interval": "day"
+      }
+    },
+    {
+      "name": "Get URLs",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "https://api.x.com/2/tweets/search/recent?query=AI%20automation&tweet.fields=public_metrics&max_results=10",
+        "method": "GET",
+        "authentication": "oAuth2",
+        "options": {
+          "responseFormat": "json"
+        }
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "oauth2Client": {
+            "clientId": "{{$env.X_CLIENT_ID}}",
+            "clientSecret": "{{$env.X_CLIENT_SECRET}}",
+            "accessToken": "{{$env.X_ACCESS_TOKEN}}",
+            "refreshToken": "{{$env.X_REFRESH_TOKEN}}"
+          }
+        }
+      }
+    },
+    {
+      "name": "Scrape Content",
+      "type": "n8n-nodes-base.executeCode",
+      "parameters": {
+        "code": "const urls = $input.all().map(item => item.json.data.map(tweet => tweet.url)).flat(); const my_content = $json.my_content || \"My blog on AI tools...\"; const result = await $executePython(\"python_script.py\", { action: \"scrape_analyze\", urls, my_content, n_clusters: 3 }); return JSON.parse(result);"
+      }
+    },
+    {
+      "name": "Generate Embeddings",
+      "type": "n8n-nodes-base.executeCode",
+      "parameters": {
+        "code": "const items = $input.all(); const embeddings = items.map(item => { const { url, text, keywords, cluster, similarity_to_my_content } = item.json; return { url, text, keywords, cluster, similarity_to_my_content }; }); return embeddings;"
+      }
+    },
+    {
+      "name": "Analyze Gaps",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "http://localhost:11434/api/generate",
+        "method": "POST",
+        "body": {
+          "model": "deepseek",
+          "prompt": "Analyze clusters {{JSON.stringify($input.first().json.map(item => item.cluster))}} and similarities {{JSON.stringify($input.first().json.map(item => item.similarity_to_my_content))}}. Suggest content topics to address gaps."
+        }
+      }
+    },
+    {
+      "name": "Generate Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "http://localhost:11434/api/generate",
+        "method": "POST",
+        "body": {
+          "model": "deepseek",
+          "prompt": "Generate an X thread on AI automation with embeddings similar to trending content. Output as JSON with key 'thread'."
+        }
+      }
+    },
+    {
+      "name": "Post to X",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "https://api.x.com/2/tweets",
+        "method": "POST",
+        "authentication": "oAuth2",
+        "body": {
+          "text": "{{$json.thread}}"
+        }
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "oauth2Client": {
+            "clientId": "{{$env.X_CLIENT_ID}}",
+            "clientSecret": "{{$env.X_CLIENT_SECRET}}",
+            "accessToken": "{{$env.X_ACCESS_TOKEN}}",
+            "refreshToken": "{{$env.X_REFRESH_TOKEN}}"
+          }
+        }
+      }
+    },
+    {
+      "name": "Monitor Engagement",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "https://api.x.com/2/tweets/{{post_id}}/metrics",
+        "method": "GET",
+        "authentication": "oAuth2"
+      },
+      "credentials": {
+        "oAuth2Api": {
+          "oauth2Client": {
+            "clientId": "{{$env.X_CLIENT_ID}}",
+            "clientSecret": "{{$env.X_CLIENT_SECRET}}",
+            "accessToken": "{{$env.X_ACCESS_TOKEN}}",
+            "refreshToken": "{{$env.X_REFRESH_TOKEN}}"
+          }
+        }
+      }
+    },
+    {
+      "name": "Engage with Feedback",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "http://localhost:11434/api/generate",
+        "method": "POST",
+        "body": {
+          "model": "deepseek",
+          "prompt": "Generate a reply to a comment about AI automation. Output as JSON with key 'reply'."
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        {
+          "node": "Get URLs"
+        }
+      ]
+    },
+    "Get URLs": {
+      "main": [
+        {
+          "node": "Scrape Content"
+        }
+      ]
+    },
+    "Scrape Content": {
+      "main": [
+        {
+          "node": "Generate Embeddings"
+        }
+      ]
+    },
+    "Generate Embeddings": {
+      "main": [
+        {
+          "node": "Analyze Gaps"
+        }
+      ]
+    },
+    "Analyze Gaps": {
+      "main": [
+        {
+          "node": "Generate Content"
+        }
+      ]
+    },
+    "Generate Content": {
+      "main": [
+        {
+          "node": "Post to X"
+        }
+      ]
+    },
+    "Post to X": {
+      "main": [
+        {
+          "node": "Monitor Engagement"
+        }
+      ]
+    },
+    "Monitor Engagement": {
+      "main": [
+        {
+          "node": "Engage with Feedback"
+        }
+      ]
+    }
+  }
+}
