@@ -1,0 +1,216 @@
+{
+  "name": "Embeddings-Powered Content Intelligence Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "command": "agent-s2 --platform x --action scrape --query 'AI automation' --filter 'retweets>500'"
+      },
+      "name": "Scrape Trending Content",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://content-intelligence-offering.onrender.com/analyze-viral",
+        "options": {},
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "content",
+              "value": "{{$json.my_content || 'My blog post about AI'}}"
+            },
+            {
+              "name": "viral_content",
+              "value": "{{$node['Scrape Trending Content'].json.output}}"
+            }
+          ]
+        }
+      },
+      "name": "Analyze Viral Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [400, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://content-intelligence-offering.onrender.com/optimize-structure",
+        "options": {},
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "content",
+              "value": "{{$json.my_content || 'My blog post about AI'}}"
+            },
+            {
+              "name": "viral_content",
+              "value": "{{$node['Scrape Trending Content'].json.output}}"
+            }
+          ]
+        }
+      },
+      "name": "Optimize Content Structure",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [580, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://content-intelligence-offering.onrender.com/recommend-hashtags",
+        "options": {},
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "content",
+              "value": "{{$node['Optimize Content Structure'].json.optimized_content}}"
+            },
+            {
+              "name": "viral_content",
+              "value": "{{$node['Scrape Trending Content'].json.output}}"
+            }
+          ]
+        }
+      },
+      "name": "Recommend Hashtags",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [760, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://content-intelligence-offering.onrender.com/finalize-content",
+        "options": {},
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "content",
+              "value": "{{$node['Optimize Content Structure'].json.optimized_content}}"
+            },
+            {
+              "name": "hashtags",
+              "value": "{{$node['Recommend Hashtags'].json.hashtags}}"
+            }
+          ]
+        }
+      },
+      "name": "Finalize Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [940, 300]
+    },
+    {
+      "parameters": {
+        "command": "agent-s2 --platform x --action post --content {{$node['Finalize Content'].json.final_content}}"
+      },
+      "name": "Post Content",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.x.com/2/tweets/{{$node['Post Content'].json.post_id}}/metrics",
+        "options": {
+          "authentication": "oAuth1"
+        }
+      },
+      "name": "Monitor Engagement",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [1300, 300]
+    },
+    {
+      "parameters": {
+        "command": "ollama run deepseek 'Generate reply to {{$node['Monitor Engagement'].json.comment}} with embeddings aligned to {{$node['Scrape Trending Content'].json.output}}' && agent-s2 --platform x --action reply --post_id {{$node['Post Content'].json.post_id}} --content {{reply}}"
+      },
+      "name": "Engage with Feedback",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1480, 300]
+    }
+  ],
+  "connections": {
+    "Scrape Trending Content": {
+      "main": [
+        [
+          {
+            "node": "Analyze Viral Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Viral Content": {
+      "main": [
+        [
+          {
+            "node": "Optimize Content Structure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Optimize Content Structure": {
+      "main": [
+        [
+          {
+            "node": "Recommend Hashtags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recommend Hashtags": {
+      "main": [
+        [
+          {
+            "node": "Finalize Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Finalize Content": {
+      "main": [
+        [
+          {
+            "node": "Post Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post Content": {
+      "main": [
+        [
+          {
+            "node": "Monitor Engagement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monitor Engagement": {
+      "main": [
+        [
+          {
+            "node": "Engage with Feedback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
