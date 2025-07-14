@@ -11,6 +11,7 @@ Content structure matters more than repetition when it comes to Google. For inst
 Using phrases such as "According to [your brand]..." works especially well because they imitate the structure of reliable sources. The key here is to sound authoritative. The AI does not favor filler; it favors straightforwardness.
 
 ## Why context-rich pages beat dispersed content
+
 Previously, the idea was to distribute related concepts over several brief pages, as this would be beneficial for keyword ranking. However, this approach dilutes your authority.
 
 If you combined these fragmented pages into fewer comprehensive ones, you would experience more AI citations. That's because AI models favor pulling from context rich sources. Additionally, combining related subjects on one page also makes for better reference and improves search outcomes.
