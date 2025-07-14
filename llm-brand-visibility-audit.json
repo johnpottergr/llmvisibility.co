@@ -1,0 +1,57 @@
+{
+  "nodes": [
+    {
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "parameters": {
+        "interval": "week"
+      }
+    },
+    {
+      "name": "Run Audit",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "http://localhost:10000/brand-visibility-audit",
+        "method": "POST",
+        "body": {
+          "brand": "{{ $env.BRAND_NAME }}",
+          "industry": "{{ $env.INDUSTRY }}",
+          "queries": ["What is {{ $env.BRAND_NAME }}?", "Best {{ $env.INDUSTRY }} brands"],
+          "desired_description": "{{ $env.DESIRED_DESCRIPTION }}"
+        }
+      }
+    },
+    {
+      "name": "Push to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "parameters": {
+        "operation": "append",
+        "sheetId": "{{ $env.GOOGLE_SHEET_ID }}",
+        "range": "Perception!A:F",
+        "values": [
+          "{{ $node['Run Audit'].json.brand_perception[0].query }}",
+          "{{ $node['Run Audit'].json.brand_perception[0].response }}",
+          "{{ $node['Run Audit'].json.brand_perception[0].sentiment }}",
+          "{{ $node['Run Audit'].json.brand_perception[0].tone }}",
+          "{{ $node['Run Audit'].json.brand_perception[0].accuracy }}",
+          "{{ $node['Run Audit'].json.framing_suggestions[0].suggestion }}"
+        ]
+      }
+    },
+    {
+      "name": "Send Alert",
+      "type": "n8n-nodes-base.slack",
+      "parameters": {
+        "webhookUrl": "{{ $env.SLACK_WEBHOOK }}",
+        "text": "Negative sentiment detected for {{ $env.BRAND_NAME }}: {{ $node['Run Audit'].json.brand_perception[0].sentiment }}"
+      },
+      "execute": {
+        "condition": "{{ $node['Run Audit'].json.brand_perception[0].sentiment === 'negative' }}"
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": { "main": [["Run Audit"]] },
+    "Run Audit": { "main": [["Push to Google Sheets", "Send Alert"]] }
+  }
+}
